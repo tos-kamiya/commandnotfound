@@ -10,4 +10,4 @@ class CommandNotFoundPrintTest(unittest.TestCase):
         try:
             subprocess.run(["converT"])
         except FileNotFoundError as e:
-            report(e, exit=False)
+            report(e)

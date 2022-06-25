@@ -1,7 +1,5 @@
-import sys
 import os
 import subprocess
-import contextlib
 
 
 command_not_found_command_list = [
@@ -10,34 +8,21 @@ command_not_found_command_list = [
 ]
 
 
-def _print(e: FileNotFoundError) -> None:
+def _report(e: FileNotFoundError) -> None:
     for cnfc in command_not_found_command_list:
         if os.path.exists(cnfc):
             command_name = e.filename
-            ret_code = subprocess.call([cnfc, command_name])
+            _ret_code = subprocess.call([cnfc, command_name])
 
 
-def _exit() -> None:
-    sys.exit(127)
+report = _report
 
 
-def report(e: FileNotFoundError, exit: bool = True) -> None:
-    """Print help message with a command-not-found command, if it exists.
-    Then terminate process with exit code 127.
-    """
-    _print(e)
-    if exit:
-        _exit()
-
-
-@contextlib.contextmanager
-def handler(exit: bool = True):
-    """When FileNotFound raises, print help message with a command-not-found command, if it exists.
-    Then terminate process with exit code 127.
-    """
-    try:
-        yield
-    except FileNotFoundError as e:
-        _print(e)
-        if exit:
-            _exit()
+def wrap(func):
+    def inner(*args, **kwargs):
+        try:
+            func(*args, **kwargs)
+        except FileNotFoundError as e:
+            _report(e)
+            raise e
+    return inner

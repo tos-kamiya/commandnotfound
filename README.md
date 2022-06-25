@@ -12,20 +12,6 @@ However, this trick does not work when you try to run a command in `subprocess.r
 Wrap `subprocess.run` call with the `handler` context manager of this package.
 Then, when the command is not found, such messages will be printed to the console.
 
-## Installation
-
-Install:
-
-```sh
-python3 -m pip install git+https://github.com/tos-kamiya/commandnotfound.git
-```
-
-Uninstall:
-
-```sh
-pip3 uninstall commandnotfound
-```
-
 ## How it works
 
 In some apt-based distributions such as Ubuntu, shows a hint as an error message, when a user types wrong command name, e.g.:
@@ -66,15 +52,29 @@ Python 3.8.10 (default, Mar 15 2022, 12:22:08)
 Type "help", "copyright", "credits" or "license" for more information.
 >>> import subprocess
 >>> import commandnotfound
->>> with commandnotfound.handler():
-...     subprocess.run(["converT"])
-... 
+>>> wrappred_run = commandnotfound.wrap(subprocess.run)
+>>> wrappred_run(["converT"])
 
 Command 'converT' not found, did you mean:
 
   command 'convert' from deb imagemagick-6.q16 (8:6.9.10.23+dfsg-2.1ubuntu11.4)
 ....
-$ 
+FileNotFoundError: [Errno 2] No such file or directory: 'converT'
+>>>
+```
+
+## Installation
+
+Install:
+
+```sh
+python3 -m pip install git+https://github.com/tos-kamiya/commandnotfound.git
+```
+
+Uninstall:
+
+```sh
+pip3 uninstall commandnotfound
 ```
 
 ## Usage
@@ -85,8 +85,8 @@ Context manager `handler`:
 import subprocess
 import commandnotfound
 
-with commandnotfound.handler():
-    subprocess.run(["converT"])
+wrappred_run = commandnotfound.wrap(subprocess.run)
+wrappred_run(["converT"])
 ```
 
 Function `report`:
@@ -100,7 +100,3 @@ try:
 except FileNotFoundError as e:
     commandnotfound.report(e)
 ```
-
-#### Options
-
-Both `commandnotfound.handler` and `commandnotfound.report` has a keyword argument `exit`. By passing a false value like `exit=False`, these functions does not terminate the process.
