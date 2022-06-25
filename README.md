@@ -51,8 +51,8 @@ Python 3.8.10 (default, Mar 15 2022, 12:22:08)
 Type "help", "copyright", "credits" or "license" for more information.
 >>> import subprocess
 >>> import commandnotfound
->>> wrappred_run = commandnotfound.wrap(subprocess.run)
->>> wrappred_run(["converT"])
+>>> wrapped_run = commandnotfound.wrap(subprocess.run)
+>>> wrapped_run(["converT"])
 
 Command 'converT' not found, did you mean:
 
@@ -78,19 +78,25 @@ pip3 uninstall commandnotfound
 
 ## Usage
 
-Function `wrap`:
+#### Function `wrap`:
 
-Catch a FileNotFoundException, runs a command-not-found command, and re-raise the exception.
+Wraps `subprocess.run` to catch a FileNotFoundException, run a command-not-found command, and re-raise the exception.
 
 ```python
 import subprocess
 import commandnotfound
 
-wrappred_run = commandnotfound.wrap(subprocess.run)
-wrappred_run(["converT"])
+wrapped_run = commandnotfound.wrap(subprocess.run)
+wrapped_run(["converT"])
 ```
 
-Function `report`:
+You can wrap `check_output` or `check_run` of `subprocess` module, if you need.
+
+```python
+wrapped_check_output = commandnotfound.wrap(subprocess.check_output)
+```
+
+#### Function `report`:
 
 Runs a command-not-found command.
 

@@ -21,7 +21,7 @@ report = _report
 def wrap(func):
     def inner(*args, **kwargs):
         try:
-            func(*args, **kwargs)
+            return func(*args, **kwargs)
         except FileNotFoundError as e:
             _report(e)
             raise e

@@ -11,3 +11,7 @@ class CommandNotFoundWrapTest(unittest.TestCase):
         with self.assertRaises(FileNotFoundError):
             wrapped_run(["converT"])
 
+    def test_wrap_check_output(self):
+        wrapped_check_output = wrap(subprocess.check_output)
+        out = wrapped_check_output("ls")
+        self.assertTrue(out)
