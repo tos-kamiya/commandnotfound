@@ -1,16 +1,15 @@
 # commandnotfound
 
-This package provides a wrapper of command-not-found handlers:
+This package provides a wrapper of command-not-found commands:
 
 * Apt-based distribution's `/usr/lib/command-not-found`
 * Yum-based distribution's `/usr/libexec/pk-command-not-found`
 
-You know that when a command is not found in a command line of a shell, you will see the name of a similar command or a message prompting you to install the required package.
+You know that when you type a command and then try to run it, if the command is not found, you will be informed that there is a command with a similar name, or you will be prompted to install the necessary package.
 
 However, this trick does not work when you try to run a command in `subprocess.run`.
 
-Wrap `subprocess.run` call with the `handler` context manager of this package.
-Then, when the command is not found, such messages will be printed to the console.
+The `commandnotfound` wraps `subprocess.run`, and when the command passed as its argument is not found, it invoke the command-not-found commands.
 
 ## How it works
 
