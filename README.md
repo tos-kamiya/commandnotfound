@@ -11,6 +11,8 @@ However, this trick does not work when you try to run a command in `subprocess.r
 
 The `commandnotfound` wraps `subprocess.run`, and when the command passed as its argument is not found, it invoke the command-not-found commands.
 
+**Note: Tested only on Ubuntu.**
+
 ## How it works
 
 In some apt-based distributions such as Ubuntu, shows a hint as an error message, when a user types wrong command name, e.g.:
