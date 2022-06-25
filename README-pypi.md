@@ -7,7 +7,7 @@ This package provides a wrapper of command-not-found commands:
 
 You know that when you type a command and then try to run it, if the command is not found, you will be informed that there is a command with a similar name, or you will be prompted to install the necessary package.
 
-However, this trick does not work when you try to run a command in `subprocess.run`.
+I want my Python scripts that call the command internally to also display this kind of friendly messages. However, the trick does not work when you try to run a command in `subprocess.run`. It simply displays a "command not found" message.
 
 The `commandnotfound` wraps `subprocess.run`, and when the command passed as its argument is not found, it invoke the command-not-found commands.
 
