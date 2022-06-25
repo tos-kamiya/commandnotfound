@@ -69,7 +69,7 @@ FileNotFoundError: [Errno 2] No such file or directory: 'converT'
 Install:
 
 ```sh
-python3 -m pip install git+https://github.com/tos-kamiya/commandnotfound.git
+python3 -m pip install commandnotfound
 ```
 
 Uninstall:
