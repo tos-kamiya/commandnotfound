@@ -78,7 +78,9 @@ pip3 uninstall commandnotfound
 
 ## Usage
 
-Context manager `handler`:
+Function `wrap`:
+
+Catch a FileNotFoundException, runs a command-not-found command, and re-raise the exception.
 
 ```python
 import subprocess
@@ -89,6 +91,8 @@ wrappred_run(["converT"])
 ```
 
 Function `report`:
+
+Runs a command-not-found command.
 
 ```python
 import subprocess
