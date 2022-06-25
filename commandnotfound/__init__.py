@@ -21,15 +21,23 @@ def _exit() -> None:
     sys.exit(127)
 
 
-def exit(e: FileNotFoundError) -> None:
+def report(e: FileNotFoundError, exit: bool = True) -> None:
+    """Print help message with a command-not-found command, if it exists.
+    Then terminate process with exit code 127.
+    """
     _print(e)
-    _exit()
+    if exit:
+        _exit()
 
 
 @contextlib.contextmanager
-def handler():
+def handler(exit: bool = True):
+    """When FileNotFound raises, print help message with a command-not-found command, if it exists.
+    Then terminate process with exit code 127.
+    """
     try:
         yield
     except FileNotFoundError as e:
         _print(e)
-        _exit()
+        if exit:
+            _exit()

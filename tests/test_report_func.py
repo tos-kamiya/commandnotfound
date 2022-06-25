@@ -2,12 +2,12 @@ import unittest
 import subprocess
 
 
-from commandnotfound import _print
+from commandnotfound import report
 
 
 class CommandNotFoundPrintTest(unittest.TestCase):
     def test_simple(self):
         try:
-            subprocess.run(["gitk"])
+            subprocess.run(["converT"])
         except FileNotFoundError as e:
-            _print(e)
+            report(e, exit=False)

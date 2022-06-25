@@ -9,5 +9,5 @@ class CommandNotFoundHandlerTest(unittest.TestCase):
     def test_simple(self):
         with self.assertRaises(SystemExit):
             with handler():
-                subprocess.run(["gitk"])
+                subprocess.run(["converT"])
 
