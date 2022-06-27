@@ -3,7 +3,7 @@
 This package provides a wrapper of command-not-found commands:
 
 * Apt-based distribution's `/usr/lib/command-not-found`
-* Yum-based distribution's `/usr/libexec/pk-command-not-found`
+* Dnf-based distribution's `/usr/libexec/pk-command-not-found`
 
 You know that when you type a command and then try to run it, if the command is not found, you will be informed that there is a command with a similar name, or you will be prompted to install the package required by it.
 
@@ -11,7 +11,7 @@ I want my Python scripts that call such commands internally to also display this
 
 The `commandnotfound` wraps `subprocess.run`, and when the command passed as its argument is not found, it invoke the command-not-found commands.
 
-**Note: Tested only on Ubuntu.**
+**Tested on Ubuntu and Fedora.**
 
 ## How it works
 
